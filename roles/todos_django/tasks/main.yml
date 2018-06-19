@@ -18,11 +18,21 @@
       owner=www-data
       group=www-data
 
+- name: "Create app directory {{ APP_PATH }}"
+  file:
+      path={{ apps_root }}/todos_django/src/
+      state=directory
+      mode=750
+      owner=www-data
+      group=www-data
+
 - name: Git checkout from public repo
   git:
     repo: https://github.com/pygrn/todos_django.git
     dest: "{{ apps_root }}/todos_django/src/"
-    # force: yes
+    # force: overwrite changes to files
+    force: yes
+  become_user: www-data
 
 - name: link source code to standard "app" dir
   file: state=link owner=root group=root force=yes

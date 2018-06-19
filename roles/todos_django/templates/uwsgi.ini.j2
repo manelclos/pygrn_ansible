@@ -2,7 +2,7 @@
 plugin = python3
 
 chdir = /data/apps/todos_django/app
-mount = /apps/todos_django/=todos_project/wsgi.py
+mount = /apps/todos_django=todos_project/wsgi.py
 manage-script-name = true
 needs-app = true
 
@@ -10,6 +10,11 @@ touch-reload = /etc/uwsgi/apps-available/todos_django.ini
 
 # define if needed
 venv = /data/apps/todos_django/venv
+
+env = ENVIRONMENT_NAME=pygrn
+env = ALLOWED_HOSTS=*
+env = STATIC_ROOT=/data/apps/todos_django/static/
+env = APP_URL=/apps/todos_django/
 
 # execution
 socket = /data/apps/todos_django/run/uwsgi.sock
